@@ -1,6 +1,6 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: PACKAGENAME
-Upstream-Contact: Some One <some.one.@somewhere>
+Upstream-Contact: Some One <some.one@somewhere>
 Source: http://some.url/
 
 Files: *
