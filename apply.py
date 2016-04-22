@@ -7,7 +7,7 @@ import sys, os, shutil
 from glob import glob
 from subprocess import check_call, check_output
 
-native=False
+native=True
 
 def getargs():
     import argparse
@@ -91,12 +91,20 @@ def main(args):
         P = ['sed','-i',
                     '-e','s|libPACKAGENAME1|lib%(name)s%(version)s|g'%A,
                     '-e','s|PACKAGENAME|%(name)s|g'%A,
-                    '-e','s|(1-1)|(%(version)s-1)|g'%A,
+                    '-e','s|(1)|(%(version)s)|g'%A,
                     '-e','s|Your Name|%(myname)s|g'%A,
                     '-e','s|your.name@somewhere|%(myemail)s|g'%A,
+            ]
+        if native:
+            P.extend([
+                    '-e','s|Some One|%(myname)s|g'%A,
+                    '-e','s|some.one@somewhere|%(myemail)s|g'%A,
+            ])
+        else:
+            P.extend([
                     '-e','s|Some One|%(upname)s|g'%A,
                     '-e','s|some.one@somewhere|%(upemail)s|g'%A,
-            ]
+            ])
         P.extend(files)
         _L.debug("call: '%s'", ' '.join(P))
         check_call(P)
